@@ -12,7 +12,8 @@ let op=p[pc],im=op==1?1:op==2?4:op>47&&op<52?2:0;
 if(!(op<8||op>15&&op<31||op>31&&op<35||op>47&&op<53||op>63&&op<66||op>79&&op<84))throw 5;
 if(pc+1+im>p.length)throw 9;
 t++;
-let nx=pc+1+im,g=im==1?p[pc+1]<<24>>24:im==4?p[pc+1]|p[pc+2]<<8|p[pc+3]<<16|p[pc+4]<<24:im==2?(p[pc+1]|p[pc+2]<<8)<<16>>16:0;
+let nx=pc+1+im,
+g=im==1?p[pc+1]<<24>>24:im==4?p[pc+1]|p[pc+2]<<8|p[pc+3]<<16|p[pc+4]<<24:im==2?(p[pc+1]|p[pc+2]<<8)<<16>>16:0;
 pc=nx;
 if(!op)return F(0);
 if(op==1||op==2)Q(g);
@@ -44,8 +45,8 @@ else if(op==83)return F(P()&255);
 }
 for(let id of D(I).sort()){
 try{
-let p=R(J(I,id,"program.bin")),n;
-try{n=R(J(I,id,"input.bin"))}catch{n=Buffer.alloc(0)}
+let dir=J(I,id),p=R(J(dir,"program.bin")),n;
+try{n=R(J(dir,"input.bin"))}catch{n=Buffer.alloc(0)}
 let[o,e]=V(p,n),d=J(O,id);
 M(d,{recursive:true});W(J(d,"stdout.bin"),o);W(J(d,"exit.txt"),e+"\n");
 }catch{}
